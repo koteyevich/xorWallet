@@ -8,22 +8,22 @@ namespace xorWallet.Services;
 
 public class UserService(DatabaseContext context, ILogger<UserService> logger) : IUserService
 {
-    public IEnumerable<UserModel> GetAllUsers()
+    public IEnumerable<UserModel> GetAll()
     {
         return context.Users.OrderByDescending(c => c.Id).Take(20).AsNoTracking().AsEnumerable();
     }
 
-    public UserModel? GetUserById(ObjectId id)
+    public UserModel? Get(ObjectId id)
     {
         return context.Users.FirstOrDefault(c => c.Id == id);
     }
 
-    public UserModel? GetUserById(long id)
+    public UserModel? Get(long id)
     {
         return context.Users.FirstOrDefault(c => c.UserId == id);
     }
 
-    public async Task AddUser(UserModel user)
+    public async Task Add(UserModel user)
     {
         context.Users.Add(user);
 
@@ -34,7 +34,7 @@ public class UserService(DatabaseContext context, ILogger<UserService> logger) :
         logger.LogInformation("User added.");
     }
 
-    public async Task EditUser(UserModel user)
+    public async Task Edit(UserModel user)
     {
         var userToUpdate = context.Users.FirstOrDefault(c => c.Id == user.Id);
 
@@ -56,7 +56,7 @@ public class UserService(DatabaseContext context, ILogger<UserService> logger) :
         }
     }
 
-    public async Task DeleteUser(UserModel user)
+    public async Task Delete(UserModel user)
     {
         var userToDelete = context.Users.FirstOrDefault(c => c.Id == user.Id);
 

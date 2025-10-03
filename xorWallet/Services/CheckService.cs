@@ -8,27 +8,27 @@ namespace xorWallet.Services;
 
 public class CheckService(DatabaseContext context, ILogger<CheckService> logger) : ICheckService
 {
-    public IEnumerable<CheckModel> GetAllChecks()
+    public IEnumerable<CheckModel> GetAll()
     {
         return context.Checks.OrderByDescending(c => c.Id).Take(20).AsNoTracking().AsEnumerable();
     }
 
-    public CheckModel? GetCheckById(ObjectId id)
+    public CheckModel? Get(ObjectId id)
     {
         return context.Checks.FirstOrDefault(c => c.Id == id);
     }
 
-    public CheckModel? GetCheckById(string id)
+    public CheckModel? Get(string id)
     {
         return context.Checks.FirstOrDefault(c => c.CheckId == id);
     }
 
-    public List<CheckModel> GetChecksOfUser(UserModel user)
+    public List<CheckModel> GetAllOfUser(UserModel user)
     {
         return context.Checks.Where(c => c.OwnerUserId == user.UserId).ToList();
     }
 
-    public async Task AddCheck(CheckModel check)
+    public async Task Add(CheckModel check)
     {
         context.Checks.Add(check);
 
@@ -39,9 +39,9 @@ public class CheckService(DatabaseContext context, ILogger<CheckService> logger)
         logger.LogInformation("Check added.");
     }
 
-    public async Task EditCheck(CheckModel check)
+    public async Task Edit(CheckModel check)
     {
-        var checkToUpdate = GetCheckById(check.Id);
+        var checkToUpdate = Get(check.Id);
 
         if (checkToUpdate != null)
         {
@@ -62,9 +62,9 @@ public class CheckService(DatabaseContext context, ILogger<CheckService> logger)
         }
     }
 
-    public async Task DeleteCheck(CheckModel check)
+    public async Task Delete(CheckModel check)
     {
-        var checkToDelete = GetCheckById(check.Id);
+        var checkToDelete = Get(check.Id);
 
         if (checkToDelete != null)
         {

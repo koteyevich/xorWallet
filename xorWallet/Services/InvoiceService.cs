@@ -8,27 +8,27 @@ namespace xorWallet.Services;
 
 public class InvoiceService(DatabaseContext context, ILogger<InvoiceService> logger) : IInvoiceService
 {
-    public IEnumerable<InvoiceModel> GetAllInvoices()
+    public IEnumerable<InvoiceModel> GetAll()
     {
         return context.Invoices.OrderByDescending(c => c.Id).Take(20).AsNoTracking().AsEnumerable();
     }
 
-    public InvoiceModel? GetInvoiceById(ObjectId id)
+    public InvoiceModel? Get(ObjectId id)
     {
         return context.Invoices.FirstOrDefault(c => c.Id == id);
     }
 
-    public InvoiceModel? GetInvoiceById(string id)
+    public InvoiceModel? Get(string id)
     {
         return context.Invoices.FirstOrDefault(c => c.InvoiceId == id);
     }
 
-    public List<InvoiceModel> GetInvoicesOfUser(UserModel user)
+    public List<InvoiceModel> GetAllOfUser(UserModel user)
     {
         return context.Invoices.Where(i => i.OwnerUserId == user.UserId).ToList();
     }
 
-    public async Task AddInvoice(InvoiceModel invoice)
+    public async Task Add(InvoiceModel invoice)
     {
         context.Invoices.Add(invoice);
 
@@ -39,7 +39,7 @@ public class InvoiceService(DatabaseContext context, ILogger<InvoiceService> log
         logger.LogInformation("Invoice added.");
     }
 
-    public async Task EditInvoice(InvoiceModel invoice)
+    public async Task Edit(InvoiceModel invoice)
     {
         var invoiceToUpdate = context.Invoices.FirstOrDefault(c => c.Id == invoice.Id);
 
@@ -61,7 +61,7 @@ public class InvoiceService(DatabaseContext context, ILogger<InvoiceService> log
         }
     }
 
-    public async Task DeleteInvoice(InvoiceModel invoice)
+    public async Task Delete(InvoiceModel invoice)
     {
         var invoiceToDelete = context.Invoices.FirstOrDefault(c => c.Id == invoice.Id);
 

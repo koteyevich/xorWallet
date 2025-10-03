@@ -10,13 +10,14 @@ public class Parser
     /// <returns>Arguments in an array</returns>
     public static string[] ParseArguments(string str, char delimiter = ' ')
     {
-        // /[command] arg1[delimiter]arg2[delimiter]arg3
-        // gets turned into "arg1[delimiter]arg2[delimiter]arg3"
-        // basically, we split by space to remove a "/[command]"
-        var parameters = str.Split(' ').Skip(1).ToArray()[0];
+        var parts = str.Split(' ', 2);
+        if (parts.Length < 2 || string.IsNullOrWhiteSpace(parts[1]))
+            return []; // no arguments
 
-        return parameters.Split('\n')[0].Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
+        var parameters = parts[1];
+        return parameters.Split(delimiter, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
     }
+
 
     /// <summary>
     /// Parses the second and below lines (if they exist) of the original string.

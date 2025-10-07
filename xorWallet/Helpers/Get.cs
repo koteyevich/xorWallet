@@ -40,6 +40,6 @@ public class Get
     public async Task<CheckModel?> Check(string id)
     {
         var check = _checks.Get(id);
-        return null; // do not create one.
+        return check; // do not create one.
     }
 }

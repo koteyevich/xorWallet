@@ -6,5 +6,5 @@ public interface IStartFunction
 {
     string Name { get; }
 
-    Task ExecuteAsync(Message message, string[] arguments);
+    Task ExecuteAsync(Message message, string[] data);
 }

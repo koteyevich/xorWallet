@@ -5,13 +5,13 @@ namespace xorWallet.Services.Interfaces;
 
 public interface IInvoiceService
 {
-    IEnumerable<InvoiceModel> GetAllInvoices();
+    IEnumerable<InvoiceModel> GetAll();
 
-    InvoiceModel? GetInvoiceById(ObjectId id);
-    InvoiceModel? GetInvoiceById(string id);
-    List<InvoiceModel> GetInvoicesOfUser(UserModel user);
+    InvoiceModel? Get(ObjectId id);
+    InvoiceModel? Get(string id);
+    List<InvoiceModel> GetAllOfUser(UserModel user);
 
-    Task AddInvoice(InvoiceModel invoice);
-    Task EditInvoice(InvoiceModel invoice);
-    Task DeleteInvoice(InvoiceModel invoice);
+    Task Add(InvoiceModel invoice);
+    Task Edit(InvoiceModel invoice);
+    Task Delete(InvoiceModel invoice);
 }

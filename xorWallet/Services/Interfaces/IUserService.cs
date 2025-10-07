@@ -5,12 +5,12 @@ namespace xorWallet.Services.Interfaces;
 
 public interface IUserService
 {
-    IEnumerable<UserModel> GetAllUsers();
+    IEnumerable<UserModel> GetAll();
 
-    UserModel? GetUserById(ObjectId id);
-    UserModel? GetUserById(long id);
+    UserModel? Get(ObjectId id);
+    UserModel? Get(long id);
 
-    Task AddUser(UserModel user);
-    Task EditUser(UserModel user);
-    Task DeleteUser(UserModel user);
+    Task Add(UserModel user);
+    Task Edit(UserModel user);
+    Task Delete(UserModel user);
 }

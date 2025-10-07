@@ -5,13 +5,13 @@ namespace xorWallet.Services.Interfaces;
 
 public interface ICheckService
 {
-    IEnumerable<CheckModel> GetAllChecks();
+    IEnumerable<CheckModel> GetAll();
 
-    CheckModel? GetCheckById(ObjectId id);
-    CheckModel? GetCheckById(string id);
-    List<CheckModel> GetChecksOfUser(UserModel user);
+    CheckModel? Get(ObjectId id);
+    CheckModel? Get(string id);
+    List<CheckModel> GetAllOfUser(UserModel user);
 
-    Task AddCheck(CheckModel check);
-    Task EditCheck(CheckModel check);
-    Task DeleteCheck(CheckModel check);
+    Task Add(CheckModel check);
+    Task Edit(CheckModel check);
+    Task Delete(CheckModel check);
 }

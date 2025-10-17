@@ -18,17 +18,15 @@ public class Check : IStartFunction
     private readonly IUserService _users;
     private readonly ICheckService _checks;
     private readonly StartUrlGenerator _urlGenerator;
-    private readonly ILogger<Check> _logger;
 
     public Check(Get get, ITelegramBotClient bot, ICheckService checks, IUserService users,
-        StartUrlGenerator urlGenerator, ILogger<Check> logger)
+        StartUrlGenerator urlGenerator)
     {
         _get = get;
         _bot = bot;
         _checks = checks;
         _users = users;
         _urlGenerator = urlGenerator;
-        _logger = logger;
     }
 
     public async Task ExecuteAsync(Message message, string[] data)

@@ -3,12 +3,12 @@ namespace xorWallet.Helpers;
 public class Parser
 {
     /// <summary>
-    /// Parses the first line of the string, splits using spaces and skips the first word (because that is /[command])
+    /// Parses the first line of the string, removes "/[command]" and then splits the arguments using delimiter.
     /// </summary>
     /// <param name="str">Original string</param>
     /// <param name="delimiter">Optional. Delimiter that will be used to return arguments</param>
     /// <returns>Arguments in an array</returns>
-    public static string[] ParseArguments(string str, char delimiter = ' ')
+    public static string[] ParseCommandArguments(string str, char delimiter = ' ')
     {
         var parts = str.Split(' ', 2);
         if (parts.Length < 2 || string.IsNullOrWhiteSpace(parts[1]))
@@ -16,6 +16,17 @@ public class Parser
 
         var parameters = parts[1];
         return parameters.Split(delimiter, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+    }
+
+    /// <summary>
+    /// Parses the first line of the string, splits the arguments using delimiter.
+    /// </summary>
+    /// <param name="str">Original string</param>
+    /// <param name="delimiter">Optional. Delimiter that will be used to return arguments</param>
+    /// <returns>Arguments in an array</returns>
+    public static string[] ParseArguments(string str, char delimiter = ' ')
+    {
+        return str.Split(delimiter, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
     }
 
 

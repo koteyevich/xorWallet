@@ -27,7 +27,7 @@ public class Start : ICommand
 
     public async Task ExecuteAsync(Message message)
     {
-        var arguments = Parser.ParseArguments(message.Text, '_');
+        var arguments = Parser.ParseCommandArguments(message.Text!, '_');
 
         if (arguments.Length == 0)
         {

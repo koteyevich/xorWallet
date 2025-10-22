@@ -10,13 +10,10 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
       <PackageReference Include="MongoDB.EntityFrameworkCore" Version="9.0.1" />
+      <PackageReference Include="QRCoder-ImageSharp" Version="0.10.0" />
       <PackageReference Include="Sentry" Version="5.16.0" />
       <PackageReference Include="Sentry.Extensions.Logging" Version="5.16.0" />
       <PackageReference Include="Telegram.Bot" Version="22.7.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="BotFunctionality\Callbacks\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -24,6 +21,9 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="appsettings.Development.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="qr_bg.jpg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

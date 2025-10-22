@@ -33,7 +33,7 @@ public class Check : ICommand
 
     public async Task ExecuteAsync(Message message)
     {
-        var args = Parser.ParseArguments(message.Text!);
+        var args = Parser.ParseCommandArguments(message.Text!);
 
         if (args is { Length: < 2 })
         {

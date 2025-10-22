@@ -10,7 +10,7 @@ namespace xorWallet.Services;
 
 public class CommandRegistryService : ICommandRegistryService
 {
-    private static readonly Dictionary<string, ICommand> commands = new();
+    private static readonly Dictionary<string, ICommand> Commands = new();
     private readonly ILogger<CommandRegistryService> _logger;
     private readonly ITelegramBotClient _bot;
     private readonly IBotInfo _botInfo;
@@ -28,13 +28,13 @@ public class CommandRegistryService : ICommandRegistryService
         foreach (var command in sortedCommands)
         {
             var commandName = command.BotCommand.Command.ToLower();
-            CommandRegistryService.commands[commandName] = command;
+            CommandRegistryService.Commands[commandName] = command;
 
             botCommandsList.Add(command.BotCommand);
 
             foreach (var alias in command.Aliases)
             {
-                CommandRegistryService.commands[alias.ToLower()] = command;
+                Commands[alias.ToLower()] = command;
             }
         }
 
@@ -56,12 +56,12 @@ public class CommandRegistryService : ICommandRegistryService
             return;
         }
 
-        if (commands.TryGetValue(commandName, out var command))
+        if (Commands.TryGetValue(commandName, out var command))
         {
             _logger.LogInformation("Executing command: {CommandName}", commandName);
             await command.ExecuteAsync(message);
         }
     }
 
-    public static ReadOnlyDictionary<string, ICommand> CommandsReadOnly => commands.AsReadOnly();
+    public static ReadOnlyDictionary<string, ICommand> CommandsReadOnly => Commands.AsReadOnly();
 }

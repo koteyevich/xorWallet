@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using QRCoder;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
@@ -17,13 +16,11 @@ public class QR : ICallback
 
     private readonly ITelegramBotClient _bot;
     private readonly IBotInfo _info;
-    private readonly ILogger<QR> _logger;
 
-    public QR(ITelegramBotClient bot, IBotInfo info, ILogger<QR> logger)
+    public QR(ITelegramBotClient bot, IBotInfo info)
     {
         _bot = bot;
         _info = info;
-        _logger = logger;
     }
 
     public async Task ExecuteAsync(CallbackQuery callbackQuery)
@@ -50,7 +47,7 @@ public class QR : ICallback
         {
             i.Resize(new ResizeOptions
             {
-                Size = new Size(qrBg.Width - qrBg.Width / 5, qrBg.Height - qrBg.Height / 5),
+                Size = new Size(qrBg.Width - (qrBg.Width / 5), qrBg.Height - (qrBg.Height / 5)),
                 Mode = ResizeMode.Pad,
                 Sampler = KnownResamplers.Bicubic
             });
@@ -66,6 +63,6 @@ public class QR : ICallback
         await qrBg.SaveAsync(stream, new JpegEncoder());
 
         stream.Position = 0;
-        await _bot.SendPhoto(callbackQuery.Message.Chat.Id, new InputFileStream(stream));
+        await _bot.SendPhoto(callbackQuery.Message!.Chat.Id, new InputFileStream(stream));
     }
 }

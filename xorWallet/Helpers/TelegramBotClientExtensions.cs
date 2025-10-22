@@ -48,8 +48,6 @@ public static class TelegramBotClientExtensions
         }, cancellationToken);
     }
 
-    
-    
     /// <summary>Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound).
     /// (every other argument except for which are specified in this doc are the same as Telegram.Bot SendAnimation method)</summary>
     /// <remarks>Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.</remarks>

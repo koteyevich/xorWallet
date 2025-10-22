@@ -44,7 +44,7 @@ internal class Program
             builder.AddSentry(options =>
             {
                 var sentrySettings = configuration.GetRequiredSection("Sentry").Get<SentrySettings>();
-                options.Dsn = sentrySettings.Dsn;
+                options.Dsn = sentrySettings!.Dsn;
                 options.Environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
                 options.MinimumBreadcrumbLevel = sentrySettings.MinimumBreadcrumbLevel;
                 options.MaxBreadcrumbs = sentrySettings.MaxBreadcrumbs;
@@ -58,7 +58,7 @@ internal class Program
         services.Configure<DBSettings>(configuration.GetSection(nameof(DBSettings)));
         services.AddDbContext<DatabaseContext>(options =>
         {
-            options.UseMongoDB(dbSettings?.AtlasURI, dbSettings?.DatabaseName);
+            options.UseMongoDB(dbSettings!.AtlasURI, dbSettings.DatabaseName);
         });
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<ICheckService, CheckService>();

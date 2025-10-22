@@ -1,6 +1,4 @@
-using Telegram.Bot.Types;
 using xorWallet.Models;
-using xorWallet.Services;
 using xorWallet.Services.Interfaces;
 
 namespace xorWallet.Helpers;

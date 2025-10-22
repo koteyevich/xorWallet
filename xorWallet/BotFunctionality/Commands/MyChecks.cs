@@ -1,4 +1,3 @@
-using System.Text;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -16,23 +15,21 @@ public class MyChecks : ICommand
 
     private readonly ITelegramBotClient _bot;
     private readonly Get _get;
-    private readonly IUserService _users;
     private readonly ICheckService _checks;
     private readonly StartUrlGenerator _urlGenerator;
 
-    public MyChecks(ITelegramBotClient bot, Get get, IUserService users, ICheckService checks,
+    public MyChecks(ITelegramBotClient bot, Get get, ICheckService checks,
         StartUrlGenerator urlGenerator)
     {
         _bot = bot;
         _get = get;
-        _users = users;
         _checks = checks;
         _urlGenerator = urlGenerator;
     }
 
     public async Task ExecuteAsync(Message message)
     {
-        var user = await _get.User(message.From.Id);
+        var user = await _get.User(message.From!.Id);
         var allChecks = _checks.GetAllOfUser(user);
 
         if (allChecks.Count <= 0)

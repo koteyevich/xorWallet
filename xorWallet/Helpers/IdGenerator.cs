@@ -9,6 +9,6 @@ public class IdGenerator
 
     public static string Generate()
     {
-        return $"{RandomNumberGenerator.GetString(Chars, 32)}";
+        return RandomNumberGenerator.GetString(Chars, 32);
     }
 }

@@ -32,9 +32,6 @@ public class CheckService(DatabaseContext context, ILogger<CheckService> logger)
     {
         context.Checks.Add(check);
 
-        context.ChangeTracker.DetectChanges();
-        logger.LogDebug("{ChangeTracker.DebugView.LongView}", context.ChangeTracker.DebugView.LongView);
-
         await context.SaveChangesAsync();
         logger.LogInformation("Check added.");
     }
@@ -49,9 +46,6 @@ public class CheckService(DatabaseContext context, ILogger<CheckService> logger)
             checkToUpdate.UsersActivated = check.UsersActivated;
 
             context.Checks.Update(checkToUpdate);
-
-            context.ChangeTracker.DetectChanges();
-            logger.LogDebug("{ChangeTracker.DebugView.LongView}", context.ChangeTracker.DebugView.LongView);
 
             await context.SaveChangesAsync();
             logger.LogInformation("Check updated.");
@@ -69,9 +63,6 @@ public class CheckService(DatabaseContext context, ILogger<CheckService> logger)
         if (checkToDelete != null)
         {
             context.Checks.Remove(checkToDelete);
-
-            context.ChangeTracker.DetectChanges();
-            logger.LogDebug("{ChangeTracker.DebugView}", context.ChangeTracker.DebugView.LongView);
 
             await context.SaveChangesAsync();
             logger.LogInformation("Check removed.");

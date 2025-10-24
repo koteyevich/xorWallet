@@ -8,12 +8,7 @@ namespace xorWallet.Models;
 public class CheckModel
 {
     public ObjectId Id { get; set; }
-
-    public string CheckId { get; set; } = $"check_{IdGenerator.Generate()}"; /*
-                                                                                embedding "check_" is not really necessary,
-                                                                                but makes it easier to parse in /start
-                                                                            */
-
+    public string CheckId { get; set; } = $"{(int)Bank.Check}_{IdGenerator.Generate()}";
     public long OwnerUserId { get; set; }
     public long XORs { get; set; }
     public long Activations { get; set; }

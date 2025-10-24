@@ -4,13 +4,14 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using xorWallet.BotFunctionality.Interfaces;
 using xorWallet.Helpers;
+using xorWallet.Models;
 using xorWallet.Services.Interfaces;
 
 namespace xorWallet.BotFunctionality.Commands.StartFunctions;
 
 public class Check : IStartFunction
 {
-    public string Name => "check";
+    public string Name => $"{(int)Bank.Check}";
 
     private readonly ITelegramBotClient _bot;
     private readonly Get _get;

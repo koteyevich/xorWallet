@@ -8,12 +8,7 @@ namespace xorWallet.Models;
 public class InvoiceModel
 {
     public ObjectId Id { get; set; }
-
-    public string InvoiceId { get; set; } = $"invoice_{IdGenerator.Generate()}"; /*
-                                                                                    embedding "invoice_" is not really necessary,
-                                                                                    but makes it easier to parse in /start
-                                                                                */
-
+    public string InvoiceId { get; set; } = $"{(int)Bank.Invoice}_{IdGenerator.Generate()}";
     public long OwnerUserId { get; set; }
     public long XORs { get; set; }
 }

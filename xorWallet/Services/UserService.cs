@@ -27,9 +27,6 @@ public class UserService(DatabaseContext context, ILogger<UserService> logger) :
     {
         context.Users.Add(user);
 
-        context.ChangeTracker.DetectChanges();
-        logger.LogDebug("{ChangeTracker.DebugView.LongView}", context.ChangeTracker.DebugView.LongView);
-
         await context.SaveChangesAsync();
         logger.LogInformation("User added.");
     }
@@ -43,9 +40,6 @@ public class UserService(DatabaseContext context, ILogger<UserService> logger) :
             userToUpdate.Balance = user.Balance;
 
             context.Users.Update(userToUpdate);
-
-            context.ChangeTracker.DetectChanges();
-            logger.LogDebug("{ChangeTracker.DebugView.LongView}", context.ChangeTracker.DebugView.LongView);
 
             await context.SaveChangesAsync();
             logger.LogInformation("User updated.");
@@ -63,9 +57,6 @@ public class UserService(DatabaseContext context, ILogger<UserService> logger) :
         if (userToDelete != null)
         {
             context.Users.Remove(userToDelete);
-
-            context.ChangeTracker.DetectChanges();
-            logger.LogDebug("{ChangeTracker.DebugView}", context.ChangeTracker.DebugView.LongView);
 
             await context.SaveChangesAsync();
             logger.LogInformation("User removed.");

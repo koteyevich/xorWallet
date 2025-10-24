@@ -32,9 +32,6 @@ public class InvoiceService(DatabaseContext context, ILogger<InvoiceService> log
     {
         context.Invoices.Add(invoice);
 
-        context.ChangeTracker.DetectChanges();
-        logger.LogDebug("{ChangeTracker.DebugView.LongView}", context.ChangeTracker.DebugView.LongView);
-
         await context.SaveChangesAsync();
         logger.LogInformation("Invoice added.");
     }
@@ -48,9 +45,6 @@ public class InvoiceService(DatabaseContext context, ILogger<InvoiceService> log
             invoiceToUpdate.XORs = invoice.XORs;
 
             context.Invoices.Update(invoiceToUpdate);
-
-            context.ChangeTracker.DetectChanges();
-            logger.LogDebug("{ChangeTracker.DebugView.LongView}", context.ChangeTracker.DebugView.LongView);
 
             await context.SaveChangesAsync();
             logger.LogInformation("Invoice updated.");
@@ -68,9 +62,6 @@ public class InvoiceService(DatabaseContext context, ILogger<InvoiceService> log
         if (invoiceToDelete != null)
         {
             context.Invoices.Remove(invoiceToDelete);
-
-            context.ChangeTracker.DetectChanges();
-            logger.LogDebug("{ChangeTracker.DebugView}", context.ChangeTracker.DebugView.LongView);
 
             await context.SaveChangesAsync();
             logger.LogInformation("Invoice removed.");

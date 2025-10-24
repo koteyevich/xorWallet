@@ -40,4 +40,10 @@ public class Get
         var check = _checks.Get(id);
         return check; // do not create one.
     }
+
+    public async Task<InvoiceModel?> Invoice(string id)
+    {
+        var invoice = _invoices.Get(id);
+        return invoice; // do not create one.
+    }
 }

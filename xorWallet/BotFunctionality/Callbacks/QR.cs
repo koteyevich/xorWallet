@@ -16,11 +16,13 @@ public class QR : ICallback
 
     private readonly ITelegramBotClient _bot;
     private readonly IBotInfo _info;
+    private readonly StartUrlGenerator _urlGenerator;
 
-    public QR(ITelegramBotClient bot, IBotInfo info)
+    public QR(ITelegramBotClient bot, IBotInfo info, StartUrlGenerator urlGenerator)
     {
         _bot = bot;
         _info = info;
+        _urlGenerator = urlGenerator;
     }
 
     public async Task ExecuteAsync(CallbackQuery callbackQuery)
@@ -28,9 +30,9 @@ public class QR : ICallback
         var data = string.Join(
             '_',
             Parser.ParseArguments(callbackQuery.Data!, '_').Skip(1).ToArray()
-        ); // qr_check_kotEy3v1ch... => // check_kotEy3v1ch...
+        );
 
-        var url = new PayloadGenerator.Url($"https://t.me/{_info.Me.Username}?start={data}");
+        var url = new PayloadGenerator.Url(_urlGenerator.Generate(data));
         var qrGenerator = new QRCodeGenerator();
 
         var qr = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.H);

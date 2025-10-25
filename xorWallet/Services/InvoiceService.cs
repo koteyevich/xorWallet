@@ -71,4 +71,12 @@ public class InvoiceService(DatabaseContext context, ILogger<InvoiceService> log
             throw new ArgumentException("Invoice not found");
         }
     }
+
+    public async Task DeleteAllOfUser(UserModel user)
+    {
+        var invoicesOfUser = GetAllOfUser(user);
+        context.Invoices.RemoveRange(invoicesOfUser);
+
+        await context.SaveChangesAsync();
+    }
 }

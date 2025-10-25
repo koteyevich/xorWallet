@@ -14,4 +14,5 @@ public interface ICheckService
     Task Add(CheckModel check);
     Task Edit(CheckModel check);
     Task Delete(CheckModel check);
+    Task DeleteAllOfUser(UserModel user);
 }

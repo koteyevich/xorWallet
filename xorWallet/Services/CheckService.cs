@@ -72,4 +72,12 @@ public class CheckService(DatabaseContext context, ILogger<CheckService> logger)
             throw new ArgumentException("Check not found");
         }
     }
+
+    public async Task DeleteAllOfUser(UserModel user)
+    {
+        var checksOfUser = GetAllOfUser(user);
+        context.Checks.RemoveRange(checksOfUser);
+
+        await context.SaveChangesAsync();
+    }
 }

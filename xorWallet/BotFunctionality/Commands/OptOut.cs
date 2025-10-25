@@ -24,7 +24,6 @@ public class OptOut : ICommand
 
     public async Task ExecuteAsync(Message message)
     {
-        //TODO: yes/no callbacks
         var user = await _get.User(message.From!.Id);
         var keyboard = new InlineKeyboardMarkup().AddButton("Yes", "delete").AddButton("No", "decline");
         await _bot.SendMessage(message, $"Are you sure you want to remove your data from the bot? \n" +

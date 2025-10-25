@@ -14,4 +14,5 @@ public interface IInvoiceService
     Task Add(InvoiceModel invoice);
     Task Edit(InvoiceModel invoice);
     Task Delete(InvoiceModel invoice);
+    Task DeleteAllOfUser(UserModel user);
 }
